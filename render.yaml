@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: job-market-analysis
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python run.py pipeline"
+    startCommand: "streamlit run app.py --server.port $PORT --server.address 0.0.0.0"
+    envVars:
+      - key: ADZUNA_APP_ID
+        sync: false
+      - key: ADZUNA_APP_KEY
+        sync: false
+      - key: COUNTRY
+        value: in
+      - key: RESULTS_PER_PAGE
+        value: "50"
+      - key: MAX_PAGES
+        value: "10"
+      - key: DB_TYPE
+        value: sqlite
+      - key: SQLITE_PATH
+        value: data/job_market.db
