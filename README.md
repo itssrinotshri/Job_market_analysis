@@ -15,7 +15,7 @@ Designed for **recruiters, hiring managers, and data analysts** to instantly exp
 
 ## 🌐 Live Demo
 
-👉 **[https://job-market-analysis-sdqp.onrender.com/](https://job-market-analysis-sdqp.onrender.com/)**
+👉 **[https://job-market-analysis-sdqp.onrender.com/](https://job-market-analysis-1.onrender.com/)**
 
 > Hosted on Render (free tier) — may take ~30 seconds to wake up if inactive.
 
