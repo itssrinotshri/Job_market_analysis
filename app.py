@@ -11,6 +11,8 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+import altair as alt
+
 # Set page config
 st.set_page_config(
     page_title="Data Analyst Job Market Intelligence",
@@ -199,7 +201,13 @@ if nav_option == "🏆 Executive Overview":
             LIMIT 10
         """)
         st.dataframe(q1_df, use_container_width=True)
-        st.bar_chart(data=q1_df.set_index("Skill")["Postings"], use_container_width=True)
+        skill_chart = alt.Chart(q1_df).mark_bar(cornerRadiusTopRight=5, cornerRadiusBottomRight=5).encode(
+            x=alt.X('Postings:Q', title='Job Postings'),
+            y=alt.Y('Skill:N', sort='-x', title='Skill'),
+            color=alt.Color('Category:N', legend=alt.Legend(title="Category")),
+            tooltip=['Skill', 'Category', 'Postings', 'Market_Pct']
+        ).properties(height=320)
+        st.altair_chart(skill_chart, use_container_width=True)
         
     with col_b:
         st.markdown("### 🏢 Seniority Tier Distribution")
@@ -210,7 +218,13 @@ if nav_option == "🏆 Executive Overview":
             ORDER BY Postings DESC
         """)
         st.dataframe(sen_df, use_container_width=True)
-        st.bar_chart(data=sen_df.set_index("Seniority")["Postings"], use_container_width=True)
+        sen_chart = alt.Chart(sen_df).mark_bar(cornerRadiusTopLeft=5, cornerRadiusTopRight=5).encode(
+            x=alt.X('Seniority:N', sort='-y', title='Seniority Tier'),
+            y=alt.Y('Postings:Q', title='Job Postings'),
+            color=alt.value('#38bdf8'),
+            tooltip=['Seniority', 'Postings']
+        ).properties(height=320)
+        st.altair_chart(sen_chart, use_container_width=True)
 
 
 # NAV 2: SKILL DEMAND EXPLORER

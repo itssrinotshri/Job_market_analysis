@@ -3,7 +3,7 @@ services:
     name: job-market-analysis
     env: python
     plan: free
-    buildCommand: "pip install -r requirements.txt && python run.py pipeline"
+    buildCommand: "pip install -r requirements.txt"
     startCommand: "streamlit run app.py --server.port $PORT --server.address 0.0.0.0"
     envVars:
       - key: ADZUNA_APP_ID
