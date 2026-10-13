@@ -111,6 +111,29 @@ def get_db_summary():
     return total_jobs, total_skills, avg_salary, top_skill_name
 
 
+@st.cache_data(ttl=600)
+def get_last_refreshed() -> str:
+    """Returns the date of the most recently fetched job posting in the DB."""
+    if not DB_PATH.exists():
+        return "N/A"
+    try:
+        import sqlite3 as _sqlite3
+        from datetime import datetime as _dt
+        conn = _sqlite3.connect(DB_PATH)
+        row = conn.execute(
+            "SELECT MAX(fetched_at) FROM jobs WHERE fetched_at IS NOT NULL AND fetched_at != ''"
+        ).fetchone()
+        conn.close()
+        raw = row[0] if row and row[0] else None
+        if raw:
+            # Parse ISO format and return a friendly date string
+            parsed = _dt.fromisoformat(raw[:19])
+            return parsed.strftime("%d %b %Y, %I:%M %p IST")
+        return "N/A"
+    except Exception:
+        return "N/A"
+
+
 # Header & Banner
 st.title("📊 Data Analyst Job Market Intelligence")
 st.markdown("##### *Live Data Engineering, SQL Analytics, & Interactive Market Dashboard Portfolio*")
@@ -173,6 +196,27 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
+# Last Refreshed Caption
+last_refreshed = get_last_refreshed()
+st.markdown(
+    f"""
+    <div style="text-align:center; margin-top:10px; margin-bottom:4px;">
+        <span style="
+            background: rgba(2, 132, 199, 0.12);
+            border: 1px solid rgba(2, 132, 199, 0.3);
+            border-radius: 20px;
+            padding: 5px 16px;
+            font-size: 0.8rem;
+            color: #7dd3fc;
+            letter-spacing: 0.03em;
+        ">
+            📅 Data last refreshed: <strong>{last_refreshed}</strong> &nbsp;|&nbsp;
+            🗃️ <strong>{total_jobs:,}</strong> postings analysed
+        </span>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 st.markdown("<br>", unsafe_allow_html=True)
 
 # NAV 1: EXECUTIVE OVERVIEW
