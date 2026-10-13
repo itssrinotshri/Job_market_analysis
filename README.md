@@ -15,9 +15,25 @@ Designed for **recruiters, hiring managers, and data analysts** to instantly exp
 
 ## 🌐 Live Demo
 
-👉 **[https://job-market-analysis-sdqp.onrender.com/](https://job-market-analysis-1.onrender.com/)**
+👉 **[https://job-market-analysis-sdqp.onrender.com/](https://job-market-analysis-sdqp.onrender.com/)**
 
 > Hosted on Render (free tier) — may take ~30 seconds to wake up if inactive.
+
+---
+
+## 📊 Business Insights & Key Findings
+
+Snapshot from **1,288 unique postings** cleaned and deduplicated across top tech hiring hubs in India:
+
+**Core Market Findings**
+- **SQL (10.3% / 133 postings)** is the **#1 most requested technical skill**, followed by **Python (9.9% / 127 postings)** and **Machine Learning (9.4% / 121 postings)**.
+- **Statistics (6.3% / 81 postings)** and **Power BI (4.0% / 51 postings)** round out the top 5 core technologies.
+- **Python + SQL** is the single most common co-occurring skill pair, appearing together in **over 5%** of all job ads.
+- **Average Benchmark Compensation** across postings stands at **₹11.18 Lakhs per annum**.
+- **Karnataka / Bengaluru** represents the largest hiring hub (>26% of postings), followed by **Hyderabad**, **Pune**, and **Mumbai**.
+- **Seniority Breakdown**: Mid-Level roles dominate hiring demand (**944 postings / 73.3%**), followed by Senior (**223**), Lead/Manager (**74**), and Entry-Level (**47**).
+
+> **Methodology Note**: A bare regex matcher was tightened to require explicit domain phrasing (e.g., “predictive modeling”, “machine learning models”) to eliminate false-positive mentions from company boilerplate descriptions.
 
 ---
 
@@ -26,7 +42,7 @@ Designed for **recruiters, hiring managers, and data analysts** to instantly exp
 Choose any of the following options to access the project:
 
 ### 1️⃣ Option A: Double-Click Launcher (Windows)
-Double-click [`launch.bat`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/launch.bat) in the project folder. It will launch the interactive web dashboard directly in your web browser.
+Double-click [`launch.bat`](launch.bat) in the project folder. It will launch the interactive web dashboard directly in your web browser.
 
 ### 2️⃣ Option B: Python Command Line Launcher
 Run the following command in your terminal:
@@ -36,7 +52,7 @@ python run.py web
 > Opens the interactive **Streamlit Web Dashboard** at `http://localhost:8501`.
 
 ### 3️⃣ Option C: Zero-Dependency Interactive HTML Report (No Python Required)
-Open [`outputs/job_market_insights.html`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/outputs/job_market_insights.html) directly in any web browser (Chrome, Edge, Safari, Firefox). It contains interactive Chart.js visualizations, KPI cards, and skill tables!
+Open [`outputs/job_market_insights.html`](outputs/job_market_insights.html) directly in any web browser (Chrome, Edge, Safari, Firefox). It contains interactive Chart.js visualizations, KPI cards, and skill tables!
 
 ---
 
@@ -53,7 +69,7 @@ Open [`outputs/job_market_insights.html`](file:///c:/Users/srini/Desktop/sql%20p
 
 ## 🌟 Key Features & Dashboard Modules
 
-The interactive web app ([`app.py`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/app.py)) provides 7 comprehensive modules:
+The interactive web app ([`app.py`](app.py)) provides 7 comprehensive modules:
 
 1. 🏆 **Executive Overview**: High-level KPI metric cards (Total Jobs, Top Skills, Benchmark Salary, Remote Work Ratio).
 2. 🎯 **Skill Demand Explorer**: Filterable market demand breakdown by skill category (SQL, Python, Power BI, Cloud, ML, ETL).
@@ -62,15 +78,6 @@ The interactive web app ([`app.py`](file:///c:/Users/srini/Desktop/sql%20project
 5. 🔍 **Live Job Search Engine**: Search postings by keyword, title, skill, salary range, or remote preference with direct job link redirects.
 6. ⚡ **Interactive SQL Playground**: Execute custom ANSI SQL queries directly against `job_market.db` in real-time with instant CSV export.
 7. 🔄 **Live Data Pipeline Runner**: Trigger collection, cleaning, and SQLite database refresh with 1 click.
-
----
-
-## 📊 Business Insights & Key Findings
-
-- **Top Skill Demand**: **SQL (12.8% of total jobs)** is the single most requested technical skill, followed by **Machine Learning (11.9%)** and **Python (8.96%)**.
-- **BI Tool Rivalry**: **Power BI (4.07%)** leads **Tableau (2.71%)** in overall posting volume across Indian tech hubs.
-- **Skill Co-occurrence**: The most frequent technology pair in single job postings is **Python + SQL (5.12%)**, followed by **Machine Learning + Python (3.01%)** and **Power BI + SQL (2.41%)**.
-- **Geographic Concentration**: **Karnataka (Bengaluru)** represents **27.8%** of all job postings, followed by **Maharashtra (13.6%)** and **Telangana (10.2%)**.
 
 ---
 
@@ -110,14 +117,14 @@ posting_skills (job_id [FK], skill_name [FK])
 
 ## 💻 Standalone Analytical SQL Queries
 
-All analytical query scripts are stored in [`sql/queries/`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/sql/queries/):
+All analytical query scripts are stored in [`sql/queries/`](sql/queries/):
 
-- [`01_top_skills.sql`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/sql/queries/01_top_skills.sql) - Overall skill demand frequency & market percentage.
-- [`02_skills_by_seniority.sql`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/sql/queries/02_skills_by_seniority.sql) - Skill rank changes across Entry, Mid, Senior, and Lead tiers.
-- [`03_salary_trends.sql`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/sql/queries/03_salary_trends.sql) - Compensation benchmarks by remote status & seniority.
-- [`04_top_hiring_locations_companies.sql`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/sql/queries/04_top_hiring_locations_companies.sql) - City volume & top hiring organizations.
-- [`05_skill_cooccurrence.sql`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/sql/queries/05_skill_cooccurrence.sql) - Technology pair frequency co-occurrence matrix.
-- [`06_posting_volume_over_time.sql`](file:///c:/Users/srini/Desktop/sql%20project/job-market-analysis/sql/queries/06_posting_volume_over_time.sql) - Posting volume breakdown by search query.
+- [`01_top_skills.sql`](sql/queries/01_top_skills.sql) - Overall skill demand frequency & market percentage.
+- [`02_skills_by_seniority.sql`](sql/queries/02_skills_by_seniority.sql) - Skill rank changes across Entry, Mid, Senior, and Lead tiers.
+- [`03_salary_trends.sql`](sql/queries/03_salary_trends.sql) - Compensation benchmarks by remote status & seniority.
+- [`04_top_hiring_locations_companies.sql`](sql/queries/04_top_hiring_locations_companies.sql) - City volume & top hiring organizations.
+- [`05_skill_cooccurrence.sql`](sql/queries/05_skill_cooccurrence.sql) - Technology pair frequency co-occurrence matrix.
+- [`06_posting_volume_over_time.sql`](sql/queries/06_posting_volume_over_time.sql) - Posting volume breakdown by search query.
 
 ---
 
@@ -136,7 +143,10 @@ cd job-market-analysis
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Launch interactive web dashboard
+# 3. (Optional) Live API pulls — copy the template and add your own keys
+copy .env.example .env
+
+# 4. Launch interactive web dashboard
 python run.py web
 ```
 
@@ -152,7 +162,7 @@ job-market-analysis/
 ├── README.md                          # Repository Documentation & Quickstart
 ├── FULL_PROJECT_PORTFOLIO.md          # Comprehensive Single-File Master Document
 ├── requirements.txt                   # Pinned Python Dependencies
-├── .env                               # Local API & Database Settings
+├── .env.example                       # Template for local API settings (copy to .env)
 ├── config.py                          # Global Configuration Loader
 ├── .github/workflows/daily_pipeline.yml # Automated GitHub Actions Ingestion
 ├── data/
