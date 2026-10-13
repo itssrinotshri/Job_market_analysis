@@ -113,7 +113,7 @@ def get_db_summary():
 
 @st.cache_data(ttl=600)
 def get_last_refreshed() -> str:
-    """Returns the date of the most recently fetched job posting in the DB."""
+    """Returns the most recent posted_date from the DB as a friendly string."""
     if not DB_PATH.exists():
         return "N/A"
     try:
@@ -121,14 +121,14 @@ def get_last_refreshed() -> str:
         from datetime import datetime as _dt
         conn = _sqlite3.connect(DB_PATH)
         row = conn.execute(
-            "SELECT MAX(fetched_at) FROM jobs WHERE fetched_at IS NOT NULL AND fetched_at != ''"
+            "SELECT MAX(posted_date) FROM jobs WHERE posted_date IS NOT NULL AND posted_date != ''"
         ).fetchone()
         conn.close()
         raw = row[0] if row and row[0] else None
         if raw:
-            # Parse ISO format and return a friendly date string
-            parsed = _dt.fromisoformat(raw[:19])
-            return parsed.strftime("%d %b %Y, %I:%M %p IST")
+            # Remove trailing Z and parse ISO format
+            parsed = _dt.fromisoformat(raw.replace("Z", ""))
+            return parsed.strftime("%d %b %Y, %I:%M %p UTC")
         return "N/A"
     except Exception:
         return "N/A"
